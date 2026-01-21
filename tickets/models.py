@@ -33,8 +33,10 @@ class Ticket(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='assigned_tickets'
+        related_name='assigned_tickets',
+        limit_choices_to={'role': 'RESOLVER'}
     )
+
 
     def __str__(self):
         return f"{self.title} ({self.status})"
