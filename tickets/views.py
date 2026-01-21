@@ -15,3 +15,8 @@ class TicketListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+class TicketDetailView(generics.RetrieveAPIView):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdmin]
